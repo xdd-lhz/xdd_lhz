@@ -55,7 +55,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         response.setContentType("application/json; charset=utf-8");
         try {
             writer = response.getWriter();
-            writer.print(new ObjectMapper().writeValueAsString(CommonResult.failed(msg)));
+            writer.print(new ObjectMapper().writeValueAsString(CommonResult.failed(CommonResult.RetCode.UNAUTHORIZED,msg,null)));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
