@@ -28,7 +28,12 @@ public class JwtUtil {
      * @return
      */
     public static Integer parseUserId(String token) {
-        String userId = JWT.decode(token).getAudience().get(0);
+        String userId = "";
+        try {
+            userId= JWT.decode(token).getAudience().get(0);
+        } catch (Exception e) {
+            return 0;
+        }
         return Integer.valueOf(userId);
     }
 
@@ -48,7 +53,11 @@ public class JwtUtil {
      * @return
      */
     public static Boolean validToken(String token) {
-        return new Date().before(etExpires(token));
+        try {
+            return new Date().before(etExpires(token));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

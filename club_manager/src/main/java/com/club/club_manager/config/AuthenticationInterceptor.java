@@ -40,11 +40,17 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             user = userService.getById(JwtUtil.parseUserId(token));
         } catch (Exception e) {
             returnJson(response,"token错误");
+            return false;
+        }
+        if (user == null) {
+            returnJson(response,"token错误");
+            return false;
+
         }
 
         if (!JwtUtil.validToken(token)) {
             returnJson(response,"token过期");
-            //return false;
+            return false;
         }
         return true;
     }
