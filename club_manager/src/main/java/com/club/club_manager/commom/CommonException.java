@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
  * @date: 2020/10/26
  **/
 @ControllerAdvice
+@RestController
 public class CommonException {
     @ExceptionHandler(MyException.class)
     public CommonResult<String> exceptionHandler(MyException e) {
@@ -20,6 +21,7 @@ public class CommonException {
 
     @ExceptionHandler(Exception.class)
     public CommonResult<String> exceptionHandler(Exception e) {
+        e.printStackTrace();
         return CommonResult.failed();
     }
 

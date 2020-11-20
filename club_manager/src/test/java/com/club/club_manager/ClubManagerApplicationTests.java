@@ -3,15 +3,22 @@ package com.club.club_manager;
 import com.club.club_manager.commom.CommonResult;
 import com.club.club_manager.entity.User;
 import com.club.club_manager.jwt.JwtUtil;
+import com.club.club_manager.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-//@SpringBootTest
-
+@SpringBootTest
 class ClubManagerApplicationTests {
+    @Autowired
+    private UserServiceImpl userService;
+
 
 	@Test
 	void contextLoads() throws JsonProcessingException {
@@ -28,5 +35,12 @@ class ClubManagerApplicationTests {
 
         System.out.println(new ObjectMapper().writeValueAsString(CommonResult.failed("1")));
     }
+    @Transactional
+    @Test
+    @Rollback(value = false)
+    void testPropagation() throws Exception {
+       userService.addRequire(new User("::","12"));
+    }
+
 
 }
