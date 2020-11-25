@@ -2,6 +2,7 @@ package com.club.club_manager.controller;
 
 import com.club.club_manager.commom.CommonResult;
 import com.club.club_manager.entity.User;
+import com.club.club_manager.service.TestService;
 import com.club.club_manager.service.UserService;
 import com.club.club_manager.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,32 @@ import javax.sound.midi.Soundbank;
 public class PropagationController {
     @Autowired
     UserService userService;
+    @Autowired
+    TestService testService;
 
 
-   // @Transactional(rollbackFor = Exception.class)
+
     @PostMapping("/test01")
-    public CommonResult test(@RequestParam("id")Integer id,@RequestParam("name")String name) throws Exception {
-       // userService.addRequiteException(new User("123","456"));
-        return CommonResult.succeed(id+":"+name);
+    public CommonResult test() throws Exception {
+        userService.addRequireNew(new User("123","456"));
+        return CommonResult.succeed("666");
     }
+
+
+    @PostMapping("/test22")
+    public CommonResult test2() throws Exception {
+        testService.test03(new User("123","456"));
+        return CommonResult.succeed("666");
+    }
+
+
+
+
+
+
+
+
+
     @ResponseBody
     @PostMapping("/test02")
     public CommonResult testb() throws Exception {

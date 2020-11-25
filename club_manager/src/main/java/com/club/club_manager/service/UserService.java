@@ -16,22 +16,18 @@ public interface UserService extends IService<User> {
 
     CommonResult<String> login(String username,String password);
 
-    public void addRequire(User user);
+     void addRequire(User user) throws Exception;
 
-    public void addRequire2(User user) ;
+     void addRequire2(User user) ;
 
 
 
-    public void addRequiteException(User user) throws Exception;
-    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
-    public void addRequireNew(User user);
+     void addRequiteException(User user) throws Exception;
+     void addRequireNew(User user) throws Exception;
 
-    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
-    public void addRequiteExceptionNew(User user) throws Exception ;
+     void addRequiteExceptionNew(User user) throws Exception ;
 
-    @Transactional(rollbackFor = Exception.class,propagation = Propagation.NESTED)
-    public void addRequireNESTED(User user) ;
+     void addRequireNESTED(User user) ;
 
-    @Transactional(rollbackFor = Exception.class,propagation = Propagation.NESTED)
-    public void addRequiteExceptionNESTED(User user) throws Exception ;
+     void addRequiteExceptionNESTED(User user) throws Exception ;
 }
